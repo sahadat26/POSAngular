@@ -1,0 +1,65 @@
+<div class="row">
+    <div class="col-md-6">
+        <form class="form" #productUnitSetup="ngForm" (ngSubmit)="onSubmit()"  novalidate>
+           {{UnitModel.UnitName}}
+            <div class="card-body">
+             <h3 class="font-size-lg text-dark font-weight-bold mb-6">Product Unit Setup</h3>
+             <div class="mb-15">
+              <div class="form-group row">
+               <label class="col-lg-12 col-form-label">Product Unit Name:</label>
+               <div class="col-lg-12">
+                <input type="text" required #unitName="ngModel" [class.is-invalid]="unitName.invalid && unitName.touched"  class="form-control" name="UnitName" [(ngModel)]="UnitModel.UnitName"  placeholder="Enter Unit Name"/>
+                <small class="text-danger" [class.d-none]="unitName.valid || unitName.untouched">Unit name is required</small>
+                
+               </div>
+              </div>
+              
+             </div>
+             
+            
+            </div>
+            <div class="card-footer">
+             <div class="row">
+              <div class="col-lg-3"></div>
+              <div class="col-lg-6">
+               <button [disabled]="productUnitSetup.form.invalid"  type="submit" class="btn btn-success mr-2">Save</button>
+               
+              </div>
+             </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <div class="card-body">
+            <h3 class="font-size-lg text-dark font-weight-bold mb-6">List of Category</h3>
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Category Name</th>
+                    <th scope="col">Action</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Edit | Delete</td>
+                   
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Edit | Delete</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>Edit | Delete</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
