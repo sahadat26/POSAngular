@@ -13,4 +13,8 @@ export class CustomNotification {
     {
         return msg+' has been successfully updated';
     }
+    public DeleteMsg(msg:string)
+    {
+        return msg+' successfully Deleted';
+    }
 }

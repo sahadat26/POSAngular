@@ -32,16 +32,6 @@ export class ProductSetupComponent implements OnInit {
 
   ngOnInit(): void {
    
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 5,
-      lengthMenu:[5,10,15,20,50],
-     
-     
-      processing: true
-
-    };
-
     this.getAllCategories();
     console.log(this.getAllCategories());
     
@@ -102,24 +92,30 @@ export class ProductSetupComponent implements OnInit {
 
 
   }
-  Edit(selecteddata:any)
+  Edit(dataList:any)
   {
-    this.ProductSetupModel=Object.assign({},selecteddata) ;
+    this.ProductSetupModel=Object.assign({},dataList) ;
     //this.ProductSetupModel=selecteddata;
     this.btnName="Update";
   }
 
-  Search()
+  Delete(CatId:any)
   {
-    alert(this.CatName);
-    if(this.CatName=="")
+   // this.ProductSetupModel=Object.assign({},dataList);
+    if(confirm("Are you want to sure to delete"))
     {
-      this.getAllCategories();
+     this.service.DeleteCategory(CatId).subscribe(response =>{
+        this.toster.success(this.NotificationModel.DeleteMsg('Category'),'Deleted');
+        this.getAllCategories();
+     },
+     error=>{
+
+     });
+    
     }
-     
-    else
-      {
-        return this.Catgories.filter((x: string | string[]) => x.includes(this.CatName))
-      }
+    else{
+
+    }
   }
+  
 }

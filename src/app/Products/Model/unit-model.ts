@@ -1,3 +1,4 @@
 export class UnitModel {
-    public UnitName:string="";
+    public unitId:any=0;
+    public unitName:string="";
 }

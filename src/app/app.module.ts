@@ -19,6 +19,8 @@ import { ProductUnitSetupComponent } from './Products/product-unit-setup/product
 import { ProductBrandComponent } from './Products/product-brand/product-brand.component';
 import { DataTablesModule } from 'angular-datatables';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { ProductinfoComponent } from './Products/productinfo/productinfo.component';
 
 
 @NgModule({
@@ -31,7 +33,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FooterComponent,
     ProductSetupComponent,
     ProductUnitSetupComponent,
-    ProductBrandComponent
+    ProductBrandComponent,
+    ProductinfoComponent
   
    
   ],
@@ -43,7 +46,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     BrowserAnimationsModule, 
     ToastrModule.forRoot(),
     DataTablesModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

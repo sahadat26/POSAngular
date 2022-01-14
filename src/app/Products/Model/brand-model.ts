@@ -1,3 +1,4 @@
 export class BrandModel {
-   public BrandName:String="";
+   public brandId:any=0;
+   public brandName:String="";
 }
