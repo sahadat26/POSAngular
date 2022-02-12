@@ -25,6 +25,16 @@ export class ProductServiceService {
     return this.http.get(this.basePath+'/GetUnit');
   }
 
+  public getAllProduct():Observable<any>{
+    return this.http.get(this.basePath+'/GetProductList');
+  }
+
+  public getAllProductAutoComplete():Observable<any>
+  {
+    return this.http.get(this.basePath+'/GetProductAutoComplete');
+  }
+
+
   public AddCategory(_ProductSetupModel: any):Observable<any>
   {
     return this.http.post<any>(this.basePath+'/AddNewCategory',_ProductSetupModel);
@@ -36,6 +46,11 @@ export class ProductServiceService {
   public AddUnit(_UnitModel:any):Observable<any>{
     return this.http.post<any>(this.basePath+'/AddNewUnit',_UnitModel);
   }
+
+  public AddNewProduct(_ProductInfo:any):Observable<any>{
+    return this.http.post<any>(this.basePath+'/AddNewProduct',_ProductInfo);
+  }
+
   public UpdateCategory(_ProductSetupModel:any,CatId:any):Observable<any>
   {
     return this.http.put<any>(this.basePath+'/UpdateCatgeory/'+CatId,_ProductSetupModel);
@@ -48,6 +63,12 @@ export class ProductServiceService {
   {
     return this.http.put<any>(this.basePath+'/UpdateUnit/'+UnitId,_UnitModel);
   }
+
+  public UpdateProduct(_ProductInfo:any,barCode:any):Observable<any>
+  {
+    return this.http.put<any>(this.basePath+'/UpdateProduct/'+barCode,_ProductInfo);
+  }
+   
   public DeleteCategory(CatId:any):Observable<any>{
     return this.http.delete<any>(this.basePath+'/DeleteCatgeory/'+CatId);
   }
@@ -56,6 +77,10 @@ export class ProductServiceService {
   }
   public DeleteUnit(Id:any):Observable<any>{
     return this.http.delete<any>(this.basePath+'/DeleteUnit/'+Id);
+  }
+
+  public DeleteProduct(barCode:any):Observable<any>{
+    return this.http.delete<any>(this.basePath+'/DeleteProduct/'+barCode);
   }
 
 

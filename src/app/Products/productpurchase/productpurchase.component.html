@@ -1,0 +1,91 @@
+<div class="row">
+    <div class="card-body">
+        <h3 class="font-size-lg text-dark font-weight-bold mb-6">Product Purchase</h3>
+        <div class="mb-15">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label class="col-lg-12 col-form-label">#Invoice Number:</label>
+                            <div class="col-lg-12">
+                                <input type="text"  required  class="form-control" name="invoiceNumber" placeholder=""/>
+                            
+                                    
+                            </div>
+                        </div>
+            
+                        <div class="form-group col-md-4">
+                            <label class="col-lg-12 col-form-label">Supplier Name:</label>
+                            <div class="col-lg-12">
+                                <input type="text"  required  class="form-control" name="SupplierName" placeholder="Enter Supplier Number"/>
+                                
+                                    
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="col-lg-12 col-form-label">Date:</label>
+                            <div class="col-lg-12">
+                            <input type="text"  required  class="form-control" name="date" placeholder="Enter date"/>
+                            
+                                    
+                            </div>
+                        </div>
+                </div>
+    
+                <hr/>
+    
+                <div class="row">
+    
+                    <div class="col-lg-12">
+                        <form class="example-form">
+                            
+                             
+                              <input [(ngModel)]="SelectedHuman"  class="form-control txtSerach" type="text" #productName (keyup.enter)="test(SelectedHuman)"
+                                     placeholder="Product Search"
+                                     aria-label="Product"
+                                     matInput
+                                     [formControl]="myControl"
+                                     [matAutocomplete]="auto">
+                              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="AutoCompleteDisplay">
+                                <mat-option *ngFor="let option of arrFilterProduct | async" [value]="option">
+                                  {{option.barCode}}-{{option.productName}}
+                                </mat-option>
+                              </mat-autocomplete>
+                            
+                          </form>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div class="col-lg-12">
+                        <table class="table table-row">
+                            <tr>
+                                <th>Barcode Number</th>
+                                <th>Product Name</th>
+                                <th>Qty</th>
+                                <th>Buy Rate</th>
+                                <th>Sell Rate</th>
+                                <th>Sub Total</th>
+                                <th>Product Type</th>
+
+                            </tr>
+                            
+                        </table>
+                    </div>
+
+    
+                </div>
+                </div>
+                <div class="col-lg-4">
+                    oooo
+                </div>
+            </div>
+          
+                
+          
+            
+
+  
+        </div>
+    </div>
+</div>
+

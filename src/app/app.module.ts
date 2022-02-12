@@ -5,7 +5,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
 import { BrowserModule } from '@angular/platform-browser';
-import {FormsModule} from '@angular/forms';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
@@ -21,6 +23,9 @@ import { DataTablesModule } from 'angular-datatables';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ProductinfoComponent } from './Products/productinfo/productinfo.component';
+import { ProductpurchaseComponent } from './Products/productpurchase/productpurchase.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 @NgModule({
@@ -34,20 +39,25 @@ import { ProductinfoComponent } from './Products/productinfo/productinfo.compone
     ProductSetupComponent,
     ProductUnitSetupComponent,
     ProductBrandComponent,
-    ProductinfoComponent
+    ProductinfoComponent,
+    ProductpurchaseComponent
   
    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatFormFieldModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule, 
     ToastrModule.forRoot(),
     DataTablesModule,
     NgxPaginationModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    MatInputModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]
