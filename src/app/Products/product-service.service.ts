@@ -29,6 +29,10 @@ export class ProductServiceService {
     return this.http.get(this.basePath+'/GetProductList');
   }
 
+  public productfilter(barCode:any):Observable<any>{
+    return this.http.get(this.basePath+'/GetProductItem/'+barCode);
+  }
+
   public getAllProductAutoComplete():Observable<any>
   {
     return this.http.get(this.basePath+'/GetProductAutoComplete');

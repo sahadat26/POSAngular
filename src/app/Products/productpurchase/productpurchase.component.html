@@ -8,7 +8,7 @@
                         <div class="form-group col-md-4">
                             <label class="col-lg-12 col-form-label">#Invoice Number:</label>
                             <div class="col-lg-12">
-                                <input type="text"  required  class="form-control" name="invoiceNumber" placeholder=""/>
+                                <input type="text" disabled required  class="form-control" name="invoiceNumber" [(ngModel)]="purchase.invoiceNumber" placeholder=""/>
                             
                                     
                             </div>
@@ -17,15 +17,22 @@
                         <div class="form-group col-md-4">
                             <label class="col-lg-12 col-form-label">Supplier Name:</label>
                             <div class="col-lg-12">
-                                <input type="text"  required  class="form-control" name="SupplierName" placeholder="Enter Supplier Number"/>
+                                <form class="example-form">
+                            
+                             
+                                    
+                                  
+                                </form>
                                 
                                     
                             </div>
                         </div>
                         <div class="form-group col-md-4">
+                          
+
                             <label class="col-lg-12 col-form-label">Date:</label>
                             <div class="col-lg-12">
-                            <input type="text"  required  class="form-control" name="date" placeholder="Enter date"/>
+                            <input type="date"  required  class="form-control" name="date" placeholder="Enter date"/>
                             
                                     
                             </div>
@@ -40,7 +47,7 @@
                         <form class="example-form">
                             
                              
-                              <input [(ngModel)]="SelectedHuman"  class="form-control txtSerach" type="text" #productName (keyup.enter)="test(SelectedHuman)"
+                              <input [(ngModel)]="SelectedHuman"  class="form-control txtSerach" type="text" #productName (keyup.enter)="addProduct(SelectedHuman)"
                                      placeholder="Product Search"
                                      aria-label="Product"
                                      matInput
@@ -65,10 +72,18 @@
                                 <th>Buy Rate</th>
                                 <th>Sell Rate</th>
                                 <th>Sub Total</th>
-                                <th>Product Type</th>
+                               <th>Action</th>
 
                             </tr>
-                            
+                            <tr *ngFor="let obj of datarray;let i=index">
+                                <td>{{obj.barCode}}</td>
+                                <td>{{obj.productName}} </td>
+                                <td><input type="text" name="qty{{i}}" (keyup)="onKeyup(obj,i)" [(ngModel)]="obj.qty" class="txtbox form-control"/></td>
+                                <td><input type="text" name="buyRate{{i}}" (keyup)="onKeyup(obj,i)" [(ngModel)]="obj.buyRate" class="txtbox form-control" /></td>
+                                <td><input type="text" name="sellRate{{i}}" [(ngModel)]="obj.sellRate" class="txtbox form-control" /></td>
+                                <td><input type="text" name="subTotal{{i}}" disabled id="subTotal{{i}}" [value]="obj.buyRate*obj.qty"  [ngModel]="obj.subTotal"   (ngModelChange)="obj.subTotal = $event" class="txtbox form-control" /></td>
+                                <td><span class="btn-btndanger" (click)="removeform(i)">-</span></td>
+                            </tr>
                         </table>
                     </div>
 
@@ -76,7 +91,27 @@
                 </div>
                 </div>
                 <div class="col-lg-4">
-                    oooo
+                    <h6>Total Amount</h6>
+                    <input type="textbox" name="totalAmount" [(ngModel)]="purchase.totalAmount" disabled class="form-control"/>
+                    <h6>Total Item</h6>
+                    <input type="textbox" name="totalItem" [(ngModel)]="purchase.totalItem"  disabled class="form-control"/>
+                    <h6>Discount Type </h6>
+                    <select class="form-control" (click)="onChangetype()" name="discountType" [(ngModel)]="purchase.discountType">
+                        <option value="0">--Select One--</option>
+                        <option value="1">Percentage</option>
+                        <option value="2">Amount</option>
+                    </select>
+                    
+                    <h6>Discount </h6>
+                    <input type="textbox" (keyup)="onDiscount()" name="discount" [(ngModel)]="purchase.discount"  class="form-control"/>
+                    <h6>Net Amount</h6>
+                    <input type="textbox" name="netAmount" [(ngModel)]="purchase.netAmount"  disabled class="form-control"/>
+                    <h6>Paid Amount</h6>
+                    <input type="textbox" (keyup)="onPaid()" name="paidAmount" [(ngModel)]="purchase.paidAmount"  class="form-control"/>
+                    <h6>Due Amount</h6>
+                    <input type="textbox" name="dueAmount" [(ngModel)]="purchase.dueAmount"  disabled class="form-control"/>
+
+
                 </div>
             </div>
           

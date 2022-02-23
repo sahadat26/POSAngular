@@ -27,7 +27,6 @@ import { ProductpurchaseComponent } from './Products/productpurchase/productpurc
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +40,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     ProductBrandComponent,
     ProductinfoComponent,
     ProductpurchaseComponent
+    
   
    
   ],
@@ -58,6 +58,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     Ng2SearchPipeModule,
     MatInputModule,
     MatAutocompleteModule
+    
+    
+   
   ],
   providers: [],
   bootstrap: [AppComponent]
