@@ -26,6 +26,7 @@ import { ProductinfoComponent } from './Products/productinfo/productinfo.compone
 import { ProductpurchaseComponent } from './Products/productpurchase/productpurchase.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     
    
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

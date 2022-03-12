@@ -1,8 +1,9 @@
 export class Purchasegenralinfo {
      
-    invoiceNumber:string="Auto Generate";
+    invoiceNumber:string="";
     supplierName:string="";
-    invoiceDate:string="";
+    invoiceDate:string= "";
+    batchId:string="";
     totalAmount:number=0;
     totalItem:number=0;
     discountType:number=0;

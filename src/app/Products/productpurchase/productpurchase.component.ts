@@ -1,9 +1,11 @@
 
+import { DatePipe } from '@angular/common';
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { AutoComProduct } from '../Model/auto-com-product';
+import { AutoComSupplier } from '../Model/auto-com-supplier';
 import { ProductModel } from '../Model/product-model';
 import { Purchasegenralinfo } from '../Model/purchasegenralinfo';
 import { ProductServiceService } from '../product-service.service';
@@ -14,45 +16,77 @@ import { ProductServiceService } from '../product-service.service';
   styleUrls: ['./productpurchase.component.css']
 })
 export class ProductpurchaseComponent implements OnInit {
+  
 
   myControl = new FormControl();
-  options: string[] = ['One', 'Two', 'Three','Ona','Onv'];
+
+ SupplierControl=new FormControl();
+
+ myDate:string="";
 
   product=new ProductModel();
   purchase= new Purchasegenralinfo();
+  Supplier=new AutoComSupplier();
   SelectedHuman:AutoComProduct | undefined;
+  SelectedSupplier:AutoComSupplier | undefined;
+
   datarray=[] as any;
   public productfilterContainer:any;
   public barCode:any;
   public productName:any;
-  
+ 
   //public arrProduct:any;
   arrProduct=[
     {barCode:'',productName:''}
    
  
   ]
+  arrSupplier=[
+    {id:'',name:''}
+  ]
+  arrFilterSupplier!:Observable<AutoComSupplier[]>;
   arrFilterProduct!: Observable<AutoComProduct[]>;
  
+  
+  newdate:any;
   totQty:any;
   totBuyRate:any;
   totSubtotal:any;
   totItem:any;
  
-  filteredOptions!: Observable<string[]>;
-  constructor(private service:ProductServiceService){
+ // filteredOptions!: Observable<string[]>;
+  constructor(private service:ProductServiceService,public datepipe: DatePipe){
+    this.newdate=this.datepipe.transform((new Date), 'MM/dd/yyyy');
+
     
+    this.purchase.invoiceDate=this.newdate;
+
+   // console.log(this.purchase.invoiceDate);
+   
+  }
+  autoGenerateInvoice()
+  {
+    this.purchase.invoiceNumber=Math.floor(100000+Math.random()*90000).toString();
   }
   ngOnInit() {
     
+    this.autoGenerateInvoice();
    
+    this.getAllsupplier();
+    this.arrFilterSupplier=this.SupplierControl.valueChanges.pipe(
+        startWith(''),
+        map((value)=>this._filterSupplier(value)),
 
+    );
+    this.getAllproducts();
     this.arrFilterProduct = this.myControl.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value)),
     );
 
-    this.getAllproducts();
+
+    
+    
   }
 /* service Call */
 
@@ -63,6 +97,15 @@ export class ProductpurchaseComponent implements OnInit {
        
       })
   }
+ 
+  private getAllsupplier():void{
+    this.service.getAllSupplier().subscribe(result=>{
+      this.arrSupplier=result;
+
+     
+    })
+  }
+
 
   private productFilter(data:any):void{
     
@@ -96,7 +139,7 @@ export class ProductpurchaseComponent implements OnInit {
   }
 
   /*End */
-
+/* start for Product*/
   private _filter(value: any): AutoComProduct[] {
     //const filterValue = value.toLowerCase();
 
@@ -110,11 +153,40 @@ export class ProductpurchaseComponent implements OnInit {
 
   });
 }
+/*End for Product*/
+
+/* start for Supplier*/
+private _filterSupplier(value: any): AutoComSupplier[] {
+  //const filterValue = value.toLowerCase();
+
+ // return this.options.filter(option => option.toLowerCase().includes(filterValue));
+
+ return this.arrSupplier.filter((item: any) => {
+ 
+  if (typeof value === 'object') { value = "" };
+  const TempString1 = item.id + ' - ' + item.name;
+  return TempString1.toLowerCase().includes(value.toLowerCase());
+
+});
+}
+/*End for Supplier*/
+
+
+
+
 
 AutoCompleteDisplay(item: any): string {
   if (item == undefined) { return "" }
   return item.barCode + ' - ' + item.productName;
 }
+
+AutoCompleteSupplier(item: any): string {
+  if (item == undefined) { return "" }
+  return item.id + ' - ' + item.name;
+}
+
+
+
 addProduct(datavalue:any):void
   {
    
@@ -124,8 +196,26 @@ addProduct(datavalue:any):void
 
     this.productFilter(this.barCode);
 
+
+    console.log(this.purchase);
+    console.log(this.datarray);
+   
 /* End */
   
+  }
+
+  onSave():void
+  {
+    var body={
+      PurchaseInvoice:this.purchase,
+      PurchaseDetails:this.datarray
+    }
+    
+    this.service.AddPurchase(body).subscribe(response=>{
+          //alert(response);
+    })
+
+    this.autoGenerateInvoice();
   }
 
   removeform(data:any)

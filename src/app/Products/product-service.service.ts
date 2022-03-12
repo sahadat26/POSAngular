@@ -28,6 +28,10 @@ export class ProductServiceService {
   public getAllProduct():Observable<any>{
     return this.http.get(this.basePath+'/GetProductList');
   }
+  
+  public getAllSupplier():Observable<any>{
+    return this.http.get(this.basePath+'/GetSupplier');
+  }
 
   public productfilter(barCode:any):Observable<any>{
     return this.http.get(this.basePath+'/GetProductItem/'+barCode);
@@ -54,6 +58,12 @@ export class ProductServiceService {
   public AddNewProduct(_ProductInfo:any):Observable<any>{
     return this.http.post<any>(this.basePath+'/AddNewProduct',_ProductInfo);
   }
+ 
+  public AddPurchase(_invoice:any):Observable<any>{
+
+    return this.http.post<any>(this.basePath+'/AddPurchase',_invoice);
+  }
+
 
   public UpdateCategory(_ProductSetupModel:any,CatId:any):Observable<any>
   {

@@ -17,12 +17,28 @@
                         <div class="form-group col-md-4">
                             <label class="col-lg-12 col-form-label">Supplier Name:</label>
                             <div class="col-lg-12">
-                                <form class="example-form">
+
+                                <select class="form-control" name="name" [(ngModel)]="Supplier.name" >
+                                    <option value="0" >Please select supplier name </option>
+                                    <option *ngFor="let objsup of arrSupplier" value="{{objsup.id}}">{{objsup.name}}</option>
+                                </select>
+
+                                <!--<form class="example-form">
                             
-                             
+                                    <input [(ngModel)]="SelectedSupplier"  class="form-control txtSerach" type="text" 
+                                    placeholder="Supplier Search"
+                                    aria-label="Supplier"
+                                    matInput
+                                    [formControl]="SupplierControl"
+                                    [matAutocomplete]="auto">
+                             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="AutoCompleteSupplier">
+                               <mat-option *ngFor="let supplierobj of arrFilterSupplier | async" [value]="supplierobj">
+                                 {{supplierobj.id}}-{{supplierobj.name}}
+                               </mat-option>
+                             </mat-autocomplete>
                                     
                                   
-                                </form>
+                                </form>-->
                                 
                                     
                             </div>
@@ -32,7 +48,7 @@
 
                             <label class="col-lg-12 col-form-label">Date:</label>
                             <div class="col-lg-12">
-                            <input type="date"  required  class="form-control" name="date" placeholder="Enter date"/>
+                            <input type="date"  required  class="form-control" name="invoiceDate" [(ngModel)]="purchase.invoiceDate" placeholder="Enter date"/>
                             
                                     
                             </div>
@@ -54,8 +70,8 @@
                                      [formControl]="myControl"
                                      [matAutocomplete]="auto">
                               <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="AutoCompleteDisplay">
-                                <mat-option *ngFor="let option of arrFilterProduct | async" [value]="option">
-                                  {{option.barCode}}-{{option.productName}}
+                                <mat-option *ngFor="let option1 of arrFilterProduct | async" [value]="option1">
+                                  {{option1.barCode}}-{{option1.productName}}
                                 </mat-option>
                               </mat-autocomplete>
                             
@@ -110,8 +126,8 @@
                     <input type="textbox" (keyup)="onPaid()" name="paidAmount" [(ngModel)]="purchase.paidAmount"  class="form-control"/>
                     <h6>Due Amount</h6>
                     <input type="textbox" name="dueAmount" [(ngModel)]="purchase.dueAmount"  disabled class="form-control"/>
-
-
+                    <h6></h6>
+                    <button type="button" class="btn btn-success" (click)="onSave()">Save</button> &nbsp;  &nbsp; <button type="button" class="btn btn-success">Print</button>
                 </div>
             </div>
           
